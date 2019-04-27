@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>Crear usuario</title>
+</head>
+
+<body>
+    <header>
+        <div class="sesion">
+            <div class="menu">
+
+            </div>
+            <div class="user">
+                <p>Administrador: <span>user</span></p>
+                <a href="#">Cerrar Sesion</a>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="formulario">
+            <h1>Sistema de Gestion de Personas</h1>
+            <form action="php/datos.php" method="post">
+                <label for="cedula">Cedula</label>
+                <input type="text" name="cedula" id="cedula" required>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" required>
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="apellido" required>
+                <label for="direccion">Direccion</label>
+                <input type="text" name="direccion" id="direccion" required>
+                <label for="telefono">Telefono</label>
+                <input type="text" name="telefono" id="telefono" required>
+                <label for="fechaNac">Fecha de nacimiento</label>
+                <input type="date" name="fechaNac" id="fechaNac" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+                <label for="pass">Contraseña</label>
+                <input type="password" name="pass" id="pass" required>
+                <label for="cpass">Confirmar Contraseña</label>
+                <input type="password" name="cpass" id="cpass" required>
+
+                <input type="submit" value="Crear">
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>
