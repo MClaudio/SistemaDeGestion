@@ -80,8 +80,8 @@
                                 echo"<td>".$row["usu_nombres"]."</td>";
                                 echo"<td>".$row["usu_apellidos"]."</td>";
                                 echo"<td>".$row["usu_direccion"]."</td>";
-                                echo"<td>".$row["usu_telefono"]."</td>";
                                 echo"<td>".$row["usu_correo"]."</td>";
+                                echo"<td>".$row["usu_telefono"]."</td>";
                                 echo"<td>".$row["usu_fecha_nacimiento"]."</td>";
                                 if((string)$row["usu_eliminado"]==='N'){
                                     echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'&delete='.true.'">Eliminar</a></td>';
@@ -91,7 +91,7 @@
                                 $user = serialize($row);
                                 $user = urlencode($user);
                                 echo'<td><a href="modificar_usuario.php?user='.$user.'">Modificar</a></td>';
-                                echo'<td><a href="#">Cambiar contraseña</a></td>';
+                                echo'<td><a href="modificar_pass.php?usu_cod='.$row["usu_codigo"].'">Cambiar contraseña</a></td>';
                                 echo"</tr>";
                             }
                         }else{
