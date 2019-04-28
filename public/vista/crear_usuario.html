@@ -4,25 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
     <title>Crear usuario</title>
 </head>
 
 <body>
     <header>
-        <div class="sesion">
-            <div class="menu">
-
-            </div>
-            <div class="user">
-                <p>Administrador: <span>user</span></p>
-                <a href="#">Cerrar Sesion</a>
-            </div>
+        <h1 class="tittle">Gestion de usuarios</h1>
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="#">Iniciar Sesion</a></li>
+                    <li><a href="crear_usuario.html">Rgistro</a></li>
+                    <li><a href="#">Editar Usuario</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="user">
+            <p>Administrador: <span>user</span></p>
+            <a href="#">Cerrar Sesion</a>
         </div>
     </header>
     <section>
         <div class="formulario">
-            <h1>Sistema de Gestion de Personas</h1>
-            <form action="php/datos.php" method="post">
+            <h2>Registro</h2>
+            <form action="../controladores/crear_usuario.php" method="post">
                 <label for="cedula">Cedula</label>
                 <input type="text" name="cedula" id="cedula" required>
                 <label for="nombre">Nombre</label>
