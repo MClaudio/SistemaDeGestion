@@ -71,7 +71,7 @@
                     <?php
                     if(isset($_SESSION['nombre'])){
                         include'../../../config/conexionBD.php';
-                        $sql = "SELECT * FROM usuario WHERE usu_eliminado = 'N'";
+                        $sql = "SELECT * FROM usuario";
                         $result = $conn->query($sql);
                         if($result->num_rows>0){
                             while($row = $result->fetch_assoc()){
@@ -83,7 +83,11 @@
                                 echo"<td>".$row["usu_telefono"]."</td>";
                                 echo"<td>".$row["usu_correo"]."</td>";
                                 echo"<td>".$row["usu_fecha_nacimiento"]."</td>";
-                                echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'">Eliminar</a></td>';
+                                if((string)$row["usu_eliminado"]==='N'){
+                                    echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'&delete='.true.'">Eliminar</a></td>';
+                                }else{
+                                    echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'&delete='.false.'">Activar</a></td>';
+                                }
                                 echo'<td><a href="#">Modificar</a></td>';
                                 echo'<td><a href="#">Cambiar contraseña</a></td>';
                                 echo"</tr>";
