@@ -1,2 +1,2 @@
 # SistemaDeGestion
-Programacion Hypermedial Paractica PHP
+Programacion Hipermedial Paractica PHP
