@@ -17,15 +17,21 @@
         <div class="menu">
             <nav>
                 <ul>
-                    <li><a href="../../../public/vista/login.html">Iniciar Sesion</a></li>
-                    <li><a href="../../../public/vista/crear_usuario.html">Rgistro</a></li>
+                    <li><a href="../../../public/vista/crear_usuario.php">Rgistro</a></li>
                     <li><a href="index.php">Editar Usuario</a></li>
                 </ul>
             </nav>
         </div>
         <div class="user">
-            <p>Administrador: <span>user</span></p>
-            <a href="#">Cerrar Sesion</a>
+            <?php
+                session_start();
+                if(isset($_SESSION['nombre'])){
+                    echo"<p>Administrador: <span>".$_SESSION['nombre']."</span></p>";
+                    echo"<a href='../../../public/controladores/sessionEnd.php'>Cerrar Sesion</a>";
+                }else{
+                    echo"<a href='../../../public/vista/login.php'>Iniciar Sesion</a>";
+                }
+            ?>
         </div>
     </header>
     <div id="contenedor">
@@ -63,8 +69,9 @@
                 -->
                 <tbody>
                     <?php
+                    if(isset($_SESSION['nombre'])){
                         include'../../../config/conexionBD.php';
-                        $sql = "SELECT * FROM usuario WHERE usu_eliminado = 'S'";
+                        $sql = "SELECT * FROM usuario WHERE usu_eliminado = 'N'";
                         $result = $conn->query($sql);
                         if($result->num_rows>0){
                             while($row = $result->fetch_assoc()){
@@ -76,26 +83,30 @@
                                 echo"<td>".$row["usu_telefono"]."</td>";
                                 echo"<td>".$row["usu_correo"]."</td>";
                                 echo"<td>".$row["usu_fecha_nacimiento"]."</td>";
-                                echo'<td><a href="#">Eliminar</a></td>';
+                                echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'">Eliminar</a></td>';
                                 echo'<td><a href="#">Modificar</a></td>';
                                 echo'<td><a href="#">Cambiar contraseña</a></td>';
                                 echo"</tr>";
                             }
                         }else{
                             echo"<tr>";
-                            echo'<td colspan="10" class="db_null">
-                                <p>No existen usuarios registrados en el sistema<p>
-                                <i class="fas fa-exclamation-circle"></i>
-                                </td>';
+                            echo'<td colspan="10" class="db_null"><p>No existen usuarios registrados en el sistema</p><i class="fas fa-exclamation-circle"></i></td>';
                             echo"</tr>"; 
                         } 
                         $conn->close();
-                    ?>
-                    
+                    }else{
+                        header("Location: ../../../public/vista/login.php");
+                    }
+                    ?>  
                 </tbody>
             </table>
+            <?php 
+                $cod = isset($_GET["delete"]) ? trim($_GET["delete"]):null; 
+                if($cod==true){
+                    echo"<p>Usuario eliminado</p>";
+                }
+            ?>
         </section>
     </div>
 </body>
-
 </html>

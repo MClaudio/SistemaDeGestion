@@ -39,16 +39,16 @@
                 $sql= "SELECT * FROM usuario WHERE usu_correo ='$email' AND usu_password = MD5('$pass')"; 
                 
                 $result = $conn->query($sql);
-
+                $user=$result->fetch_assoc();
                 if($result->num_rows>0){
                     echo"<h2>Logeo exitoso espere...</h2>";
                     echo'<i class="far fa-check-circle"></i>';
-                    $_SESSION['isLogged']=true;
-                    header("Location: ../../admin/vista/usuario/index.php");
+                    $_SESSION['nombre']=$user["usu_nombres"];
+                    header("Refresh:3; url=../../admin/vista/usuario/index.php");
                 }else{
                     echo"<h2>Datos de inicio incorrectos....</h2>";
                     echo'<i class="fas fa-exclamation-circle"></i>';
-                    header("Location: ../vista/login.html?error");
+                    header("Refresh:3; url=../vista/login.html?error");
                 }
                 $conn->close();
             ?>
