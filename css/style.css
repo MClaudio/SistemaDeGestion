@@ -68,6 +68,9 @@ body section .formulario{
     width: 30em;
     height: 35em;
     padding: 15px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .formulario>h2{
     text-transform: uppercase;

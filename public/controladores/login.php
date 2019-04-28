@@ -16,15 +16,22 @@
         <div class="menu">
             <nav>
                 <ul>
-                    <li><a href="../vista/login.html">Iniciar Sesion</a></li>
-                    <li><a href="../vista/crear_usuario.html">Rgistro</a></li>
-                    <li><a href="#">Editar Usuario</a></li>
+                    <li><a href="../vista/crear_usuario.php">Rgistro</a></li>
+                    <li><a href="../../admin/vista/usuario/index.php">Editar Usuario</a></li>
                 </ul>
             </nav>
         </div>
         <div class="user">
-            <p>Administrador: <span>user</span></p>
-            <a href="#">Cerrar Sesion</a>
+            <?php
+                session_start();
+                if(isset($_SESSION['nombre'])){
+                    echo"<p>Administrador: <span>".$_SESSION['nombre']."</span></p>";
+                    echo"<a href='sessionEnd.php'>Cerrar Sesion</a>";
+                }else{
+                    echo"<a href='../vista/login.php'>Iniciar Sesion</a>";
+                    header("Location: ../vista/login.php");
+                }
+            ?>
         </div>
     </header>
     <section>

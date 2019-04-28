@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <title>Dashboard</title>
+    <title>Administrar Usuario</title>
 </head>
 
 <body>
@@ -86,9 +86,11 @@
                                 if((string)$row["usu_eliminado"]==='N'){
                                     echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'&delete='.true.'">Eliminar</a></td>';
                                 }else{
-                                    echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'&delete='.false.'">Activar</a></td>';
+                                    echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'">Activar</a></td>';
                                 }
-                                echo'<td><a href="#">Modificar</a></td>';
+                                $user = serialize($row);
+                                $user = urlencode($user);
+                                echo'<td><a href="modificar_usuario.php?user='.$user.'">Modificar</a></td>';
                                 echo'<td><a href="#">Cambiar contraseña</a></td>';
                                 echo"</tr>";
                             }
