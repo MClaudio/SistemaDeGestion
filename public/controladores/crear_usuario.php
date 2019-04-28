@@ -16,8 +16,8 @@
         <div class="menu">
             <nav>
                 <ul>
-                    <li><a href="#">Iniciar Sesion</a></li>
-                    <li><a href="crear_usuario.html">Rgistro</a></li>
+                    <li><a href="../vista/login.html">Iniciar Sesion</a></li>
+                    <li><a href="../vista/crear_usuario.html">Rgistro</a></li>
                     <li><a href="#">Editar Usuario</a></li>
                 </ul>
             </nav>

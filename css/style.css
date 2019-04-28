@@ -142,3 +142,9 @@ body section .crear_usuario a{
 body section .crear_usuario a:hover{
     color: #DB4227;
 }
+body section .formulario.login{
+    height: 20em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
