@@ -36,7 +36,7 @@
 
                 $email = isset($_POST["email"]) ? trim($_POST["email"]):null;
                 $pass = isset($_POST["pass"]) ? trim($_POST["pass"]):null;
-                $sql= "SELECT FROM usuario WHERE usu_correo ='$email' AND usu_password = MD5('$pass')"; 
+                $sql= "SELECT * FROM usuario WHERE usu_correo ='$email' AND usu_password = MD5('$pass')"; 
                 
                 $result = $conn->query($sql);
 
@@ -48,7 +48,7 @@
                 }else{
                     echo"<h2>Datos de inicio incorrectos....</h2>";
                     echo'<i class="fas fa-exclamation-circle"></i>';
-                    header("Location: ../vista/login.html");
+                    header("Location: ../vista/login.html?error");
                 }
                 $conn->close();
             ?>
