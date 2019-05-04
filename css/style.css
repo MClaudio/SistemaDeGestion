@@ -9,6 +9,7 @@ body{
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+
 body header{
     background: #FBF7F4;
     display: flex;
@@ -41,6 +42,22 @@ header .menu nav a{
 header .menu nav a:hover{
     color: #e53935;
 }
+header .userImg{
+display: flex;
+align-items: center;
+}
+header .imagen{
+    width: 60px;
+    height: 60px;
+    margin-right: 5px;
+}
+header .imagen img{
+    width: 100%;
+    border-radius: 50%;
+}
+header .imagen img:hover{
+    opacity: .7;
+}
 header .user{
     display: flex;
     flex-direction: column;
@@ -56,7 +73,29 @@ header .user a{
 header .user a:hover{
     color: #e53935;
 }
-
+body #contenedor h2{
+    text-align: center;
+    margin-top: 10px;
+}
+body section .buscar{
+    margin: 10px 0;
+}
+body section .buscar input[type=search]{
+    padding: 10px 5px;
+    width: 20em;
+    border: 1px solid #e53935;
+}
+body section .buscar input[type=button]{
+    width: 7em;
+    padding: 10px 5px;
+    background: #e53935;
+    border: none;
+    color: #FBF7F4;
+    cursor: pointer;
+}
+body section .buscar input[type=button]:hover{
+    background-color: #A40808;
+}
 
 body section .formulario{
     text-align: center;
@@ -150,4 +189,13 @@ body section .formulario.login{
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+footer {
+    background-color: #E53935;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 10px 0;
 }

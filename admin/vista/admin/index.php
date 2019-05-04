@@ -24,13 +24,13 @@
         </div>
         <div class="user">
             <?php
-                session_start();
-                if(isset($_SESSION['nombre'])){
-                    echo"<p>Administrador: <span>".$_SESSION['nombre']."</span></p>";
-                    echo"<a href='../../../public/controladores/sessionEnd.php'>Cerrar Sesion</a>";
-                }else{
-                    echo"<a href='../../../public/vista/login.php'>Iniciar Sesion</a>";
-                }
+            session_start();
+            if (isset($_SESSION['nombre'])) {
+                echo "<p>Administrador: <span>" . $_SESSION['nombre'] . "</span></p>";
+                echo "<a href='../../../public/controladores/sessionEnd.php'>Cerrar Sesion</a>";
+            } else {
+                echo "<a href='../../../public/vista/login.php'>Iniciar Sesion</a>";
+            }
             ?>
         </div>
     </header>
@@ -69,50 +69,52 @@
                 -->
                 <tbody>
                     <?php
-                    if(isset($_SESSION['nombre'])){
-                        include'../../../config/conexionBD.php';
+                    if (isset($_SESSION['nombre'])) {
+                        include '../../../config/conexionBD.php';
                         $sql = "SELECT * FROM usuario";
                         $result = $conn->query($sql);
-                        if($result->num_rows>0){
-                            while($row = $result->fetch_assoc()){
-                                echo"<tr>";
-                                echo"<td>".$row["usu_cedula"]."</td>";
-                                echo"<td>".$row["usu_nombres"]."</td>";
-                                echo"<td>".$row["usu_apellidos"]."</td>";
-                                echo"<td>".$row["usu_direccion"]."</td>";
-                                echo"<td>".$row["usu_correo"]."</td>";
-                                echo"<td>".$row["usu_telefono"]."</td>";
-                                echo"<td>".$row["usu_fecha_nacimiento"]."</td>";
-                                if((string)$row["usu_eliminado"]==='N'){
-                                    echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'&delete='.true.'">Eliminar</a></td>';
-                                }else{
-                                    echo'<td><a href="../../controladores/deleteUser.php?usu_cod='.$row["usu_codigo"].'">Activar</a></td>';
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["usu_cedula"] . "</td>";
+                                echo "<td>" . $row["usu_nombres"] . "</td>";
+                                echo "<td>" . $row["usu_apellidos"] . "</td>";
+                                echo "<td>" . $row["usu_direccion"] . "</td>";
+                                echo "<td>" . $row["usu_correo"] . "</td>";
+                                echo "<td>" . $row["usu_telefono"] . "</td>";
+                                echo "<td>" . $row["usu_fecha_nacimiento"] . "</td>";
+                                if ((string)$row["usu_eliminado"] === 'N') {
+                                    echo '<td><a href="../../controladores/deleteUser.php?usu_cod=' . $row["usu_codigo"] . '&delete=' . true . '">Eliminar</a></td>';
+                                } else {
+                                    echo '<td><a href="../../controladores/deleteUser.php?usu_cod=' . $row["usu_codigo"] . '">Activar</a></td>';
                                 }
                                 $user = serialize($row);
                                 $user = urlencode($user);
-                                echo'<td><a href="modificar_usuario.php?user='.$user.'">Modificar</a></td>';
-                                echo'<td><a href="modificar_pass.php?usu_cod='.$row["usu_codigo"].'">Cambiar contraseña</a></td>';
-                                echo"</tr>";
+                                echo '<td><a href="modificar_usuario.php?user=' . $user . '">Modificar</a></td>';
+                                echo '<td><a href="modificar_pass.php?usu_cod=' . $row["usu_codigo"] . '">Cambiar contraseña</a></td>';
+                                echo "</tr>";
                             }
-                        }else{
-                            echo"<tr>";
-                            echo'<td colspan="10" class="db_null"><p>No existen usuarios registrados en el sistema</p><i class="fas fa-exclamation-circle"></i></td>';
-                            echo"</tr>"; 
-                        } 
+                        } else {
+                            echo "<tr>";
+                            echo '<td colspan="10" class="db_null"><p>No existen usuarios registrados en el sistema</p><i class="fas fa-exclamation-circle"></i></td>';
+                            echo "</tr>";
+                        }
                         $conn->close();
-                    }else{
+                    } else {
                         header("Location: ../../../public/vista/login.php");
                     }
-                    ?>  
+                    ?>
                 </tbody>
             </table>
-            <?php 
-                $cod = isset($_GET["delete"]) ? trim($_GET["delete"]):null; 
-                if($cod==true){
-                    echo"<p>Usuario eliminado</p>";
-                }
+            <?php
+            echo (date("Y-m-d H:i:s"));
+            $cod = isset($_GET["delete"]) ? trim($_GET["delete"]) : null;
+            if ($cod == true) {
+                echo "<p>Usuario eliminado</p>";
+            }
             ?>
         </section>
     </div>
 </body>
+
 </html>
