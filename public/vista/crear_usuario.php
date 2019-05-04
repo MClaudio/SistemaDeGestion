@@ -15,20 +15,11 @@
             <nav>
                 <ul>
                     <li><a href="crear_usuario.php">Rgistro</a></li>
-                    <li><a href="../../admin/vista/usuario/index.php">Editar Usuario</a></li>
                 </ul>
             </nav>
         </div>
         <div class="user">
-            <?php
-                session_start();
-                if(isset($_SESSION['nombre'])){
-                    echo"<p>Administrador: <span>".$_SESSION['nombre']."</span></p>";
-                    echo"<a href='../controladores/sessionEnd.php'>Cerrar Sesion</a>";
-                }else{
-                    echo"<a href='login.php'>Iniciar Sesion</a>";
-                }
-            ?>
+            <a href='login.php'>Iniciar Sesion</a>
         </div>
     </header>
     <section>

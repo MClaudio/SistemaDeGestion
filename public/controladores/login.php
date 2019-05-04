@@ -16,48 +16,47 @@
         <div class="menu">
             <nav>
                 <ul>
-                    <li><a href="../vista/crear_usuario.php">Rgistro</a></li>
-                    <li><a href="../../admin/vista/usuario/index.php">Editar Usuario</a></li>
+                    <li><a href="crear_usuario.php">Rgistro</a></li>
                 </ul>
             </nav>
         </div>
         <div class="user">
-            <?php
-                session_start();
-                if(isset($_SESSION['nombre'])){
-                    echo"<p>Administrador: <span>".$_SESSION['nombre']."</span></p>";
-                    echo"<a href='sessionEnd.php'>Cerrar Sesion</a>";
-                }else{
-                    echo"<a href='../vista/login.php'>Iniciar Sesion</a>";
-                    header("Location: ../vista/login.php");
-                }
-            ?>
+            <a href='login.php'>Iniciar Sesion</a>
         </div>
     </header>
     <section>
         <div class="formulario crear_usuario">
             <?php
-                session_start();
+            session_start();
 
-                include'../../config/conexionBD.php';
+            include '../../config/conexionBD.php';
 
-                $email = isset($_POST["email"]) ? trim($_POST["email"]):null;
-                $pass = isset($_POST["pass"]) ? trim($_POST["pass"]):null;
-                $sql= "SELECT * FROM usuario WHERE usu_correo ='$email' AND usu_password = MD5('$pass')"; 
-                
-                $result = $conn->query($sql);
-                $user=$result->fetch_assoc();
-                if($result->num_rows>0){
-                    echo"<h2>Logeo exitoso espere...</h2>";
-                    echo'<i class="far fa-check-circle"></i>';
-                    $_SESSION['nombre']=$user["usu_nombres"];
+            $email = isset($_POST["email"]) ? trim($_POST["email"]) : null;
+            $pass = isset($_POST["pass"]) ? trim($_POST["pass"]) : null;
+            $sql = "SELECT * FROM usuario WHERE usu_correo ='$email' AND usu_password = MD5('$pass')";
+
+            $result = $conn->query($sql);
+            $user = $result->fetch_assoc();
+            if ($result->num_rows > 0) {
+                echo "<h2>Logeo exitoso espere...</h2>";
+                echo '<i class="far fa-check-circle"></i>';
+                $_SESSION['isLogin'] = true;
+                $_SESSION['codigo'] = $user["usu_codigo"];
+                $_SESSION['nombre'] = $user["usu_nombres"];
+                $_SESSION['apellido'] = $user["usu_apellidos"];
+                $_SESSION['img'] = '';
+                $_SESSION['rol'] = $user["usu_rol"];
+                if ($_SESSION['rol'] == 'admin') {
+                    header("Refresh:3; url=../../admin/vista/admin/index.php");
+                } else {
                     header("Refresh:3; url=../../admin/vista/usuario/index.php");
-                }else{
-                    echo"<h2>Datos de inicio incorrectos....</h2>";
-                    echo'<i class="fas fa-exclamation-circle"></i>';
-                    header("Refresh:3; url=../vista/login.html?error");
                 }
-                $conn->close();
+            } else {
+                echo "<h2>Datos de inicio incorrectos....</h2>";
+                echo '<i class="fas fa-exclamation-circle"></i>';
+                header("Refresh:3; url=../vista/login.php");
+            }
+            $conn->close();
             ?>
         </div>
     </section>

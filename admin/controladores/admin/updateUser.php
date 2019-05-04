@@ -1,9 +1,17 @@
+<?php
+session_start();
+if (!isset($_SESSION['isLogin'])) {
+    header("Location: ../../../public/vista/login.php");
+} elseif ($_SESSION['rol'] == 'user') {
+    header("Location: ../usuario/index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../../css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -16,28 +24,27 @@
         <div class="menu">
             <nav>
                 <ul>
-                    <li><a href="../../public/vista/crear_usuario.php">Registro</a></li>
-                    <li><a href="../vista/usuario/index.php">Editar Usuario</a></li>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="usuarios.php">Usuarios</a></li>
                 </ul>
             </nav>
         </div>
         <div class="user">
-            <?php
-            session_start();
-            if (isset($_SESSION['nombre'])) {
-                echo "<p>Administrador: <span>" . $_SESSION['nombre'] . "</span></p>";
-                echo "<a href='../../public/controladores/sessionEnd.php'>Cerrar Sesion</a>";
-            } else {
-                echo "<a href='../../public/vista/login.php'>Iniciar Sesion</a>";
-                header("Location: ../../public/vista/login.php");
-            }
-            ?>
+            <div class="userImg">
+                <div class="imagen">
+                    <img src="../../../img/fotos/foto.png" alt="">
+                </div>
+                <p><span><?php echo ($_SESSION['nombre']) ?></span></p>
+            </div>
+            <a href='../../../config/sessionEnd.php'>Cerrar Sesion</a>
+
         </div>
     </header>
     <section>
+
         <div class="formulario crear_usuario">
             <?php
-            include '../../config/conexionBD.php';
+            include '../../../config/conexionBD.php';
             $cedula = isset($_POST["cedula"]) ? trim($_POST["cedula"]) : null;
             $nombre = isset($_POST["nombre"]) ? mb_strtoupper(trim($_POST["nombre"]), 'UTF-8') : null;
             $apellido = isset($_POST["apellido"]) ? mb_strtoupper(trim($_POST["apellido"]), 'UTF-8') : null;
@@ -72,7 +79,7 @@
             }
             $conn->close();
             ?>
-            <a href="../vista/usuario/index.php">Regresar</a>
+            <a href="../../vista/admin/usuarios.php">Regresar</a>
         </div>
     </section>
 </body>

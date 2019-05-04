@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['isLogin'])) {
+    header("Location: ../../../public/vista/login.php");
+} elseif ($_SESSION['rol'] == 'user') {
+    header("Location: ../usuario/index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -14,22 +22,20 @@
         <div class="menu">
             <nav>
                 <ul>
-                    <li><a href="../../../public/vista/crear_usuario.php">Rgistro</a></li>
-                    <li><a href="index.php">Editar Usuario</a></li>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="usuarios.php">Usuarios</a></li>
                 </ul>
             </nav>
         </div>
         <div class="user">
-            <?php
-            session_start();
-            if (isset($_SESSION['nombre'])) {
-                echo "<p>Administrador: <span>" . $_SESSION['nombre'] . "</span></p>";
-                echo "<a href='../../../public/controladores/sessionEnd.php'>Cerrar Sesion</a>";
-            } else {
-                echo "<a href='../../../public/vista/login.php'>Iniciar Sesion</a>";
-                header("Location: ../../../public/vista/login.php");
-            }
-            ?>
+            <div class="userImg">
+                <div class="imagen">
+                    <img src="../../../img/fotos/foto.png" alt="">
+                </div>
+                <p><span><?php echo ($_SESSION['nombre']) ?></span></p>
+            </div>
+            <a href='../../../../config/sessionEnd.php'>Cerrar Sesion</a>
+
         </div>
     </header>
     <section>
@@ -41,7 +47,7 @@
             $datos = urldecode($datos);
             $datos = unserialize($datos);
             ?>
-            <form action="../../controladores/updateUser.php?usu_codigo=<?php echo ($datos["usu_codigo"]) ?>"
+            <form action="../../controladores/admin/updateUser.php?usu_codigo=<?php echo ($datos["usu_codigo"]) ?>"
                 method="post">
                 <label for="cedula">Cedula</label>
                 <input type="text" name="cedula" id="cedula" value="<?php echo ($datos["usu_cedula"]); ?>" required>

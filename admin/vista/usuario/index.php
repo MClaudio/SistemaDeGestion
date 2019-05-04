@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['isLogin'])) {
+    header("Location: ../../../public/vista/login.php");
+} elseif ($_SESSION['rol'] == 'admin') {
+    header("Location: ../admin/index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,8 +25,10 @@
         <div class="menu">
             <nav>
                 <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Usuarios</a></li>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="#">Nuevo Mensaje</a></li>
+                    <li><a href="#">Mensajes Enviados</a></li>
+                    <li><a href="#">Mi Cuenta</a></li>
                 </ul>
             </nav>
         </div>
@@ -27,16 +37,20 @@
                 <div class="imagen">
                     <img src="../../../img/fotos/foto.png" alt="">
                 </div>
-                <p><span>Claudio Maldonado</span></p>
+                <p><span><?php echo ($_SESSION['nombre']) ?></span></p>
             </div>
-            <a href='../../../public/controladores/sessionEnd.php'>Cerrar Sesion</a>
+            <a href='../../../config/sessionEnd.php'>Cerrar Sesion</a>
             <!-- <a href='../../../public/vista/login.php'>Iniciar Sesion</a>"-->
 
         </div>
     </header>
     <div id="contenedor">
-        <h2>Mensajes Electronicos</h2>
+        <h2>Mensajes Recibidos</h2>
         <section>
+            <div class="buscar">
+                <input type="search" placeholder="Buscar">
+                <input type="button" value="Buscar">
+            </div>
             <table>
                 <thead>
                     <tr>
